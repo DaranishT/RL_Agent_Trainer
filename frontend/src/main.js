@@ -4,26 +4,28 @@ import './style.css'
 // API integration class to communicate with the backend
 class PackageAPI {
     static baseURL = '/api';
+
     static async generatePackage(config) {
         console.log('Sending config to backend:', config);
-        
         const response = await fetch(`${this.baseURL}/generate-package`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ config })
         });
-        
+    
         if (!response.ok) {
             const errorText = await response.text();
             throw new Error(`Server error: ${response.status} - ${errorText}`);
         }
-        
+    
+        // ✅ Now the backend returns { success, packageId, downloadUrl }
         return response.json();
     }
 
     static async downloadPackage(packageId) {
+        // This function is no longer called by the primary download button,
+        // but we leave the old logic here in case it's used elsewhere.
+        // The new `downloadPackage` in RLMTApp handles the Supabase link.
         const response = await fetch(`${this.baseURL}/download/${packageId}`);
         
         if (!response.ok) {
@@ -73,6 +75,7 @@ class RLMTApp {
         
         this.generatedPackageId = null; // To store the ID from the backend
         this.generatedPackageSize = null; // To store the generated package size
+        this.latestDownloadUrl = null; // ← ADDED THIS PROPERTY
         this.loadingOverlayRemover = null; // To manage the loading overlay
         
         this.init();
@@ -335,7 +338,7 @@ class RLMTApp {
                         </div>
                     </div>
                     
-                    <div class="download-actions">
+                    <div classV="download-actions">
                         <button class="btn btn-primary btn-large" onclick="app.downloadPackage()">
                             ⬇️ Download Now
                         </button>
@@ -385,14 +388,25 @@ class RLMTApp {
     async generatePackage() {
         const hideLoading = this.showLoading("Generating your customized package...");
         try {
-            // Generate package
+            // 1️⃣ Call backend
             const result = await PackageAPI.generatePackage(this.appConfig);
+    
+            // 2️⃣ Save returned info
             this.generatedPackageId = result.packageId;
-            this.generatedPackageSize = result.size;
-            
-            // Navigate to download page
+            this.generatedPackageSize = result.size; // Save size if returned
+            this.latestDownloadUrl = result.downloadUrl; // ← SAVE THE SUPABASE URL HERE
+    
+            // 3️⃣ Direct download (optional automatic download)
+            const a = document.createElement('a');
+            a.href = this.latestDownloadUrl;
+            a.download = `RLMazeTrainer_${this.currentUser?.name || 'User'}.zip`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+    
+            // 4️⃣ Navigate to "Download" view if you still want the download screen
             this.navigateTo('download');
-            
+    
         } catch (error) {
             this.showError("Failed to generate package: " + error.message);
         } finally {
@@ -401,15 +415,12 @@ class RLMTApp {
     }
     
     async downloadPackage() {
-        this.showLoading("Preparing download...");
-        try {
-            const { filename } = await PackageAPI.downloadPackage(this.generatedPackageId);
-            this.showSuccess(`Download started for ${filename}! Check your downloads folder.`);
-        } catch (error) {
-            this.showError("Download failed: " + error.message);
-        } finally {
-             this.hideLoading();
+        if (!this.latestDownloadUrl) {
+            this.showError("No download link available.");
+            return;
         }
+        // Directly open the Supabase link
+        window.open(this.latestDownloadUrl, "_blank");
     }
 
     // --- UI Utility Methods ---
@@ -460,4 +471,5 @@ class RLMTApp {
 // Initialize the app
 const app = new RLMTApp();
 window.app = app;
+
 
