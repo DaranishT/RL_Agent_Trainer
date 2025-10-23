@@ -1,0 +1,61 @@
+# ⬇ GENERAL OS / EDITOR FILES
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+*.bak
+.vscode/
+.idea/
+*.iml
+
+# ⬇ NODE / BACKEND
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vercel build artifacts
+.vercel/
+
+# Local environment variables
+.env
+.env.local
+.env.*.local
+
+# Generated Packages (local testing only – Vercel uses /tmp)
+generated-packages/
+*.zip
+
+# ⬇ PYTHON TRAINING (from /training)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+models/
+venv/
+.env/
+*.egg-info/
+
+# ⬇ LOGS / OUTPUT FILES
+logs/
+*.log
+out/
+coverage/
+
+# ⬇ OS / SHELL SCRIPTS
+*.sh~
+*.command~
+*.bat~
+*.cmd~
+start-*.bat
+start-*.sh
+start-*.command
+
+# ⬇ MISC
+# Ignore uploaded test data or runtime temp
+tmp/
+temp/
+.cache/

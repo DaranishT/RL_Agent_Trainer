@@ -1,0 +1,129 @@
+RL MAZE TRAINER - COMPLETE SETUP GUIDE
+=======================================
+
+🎯 WHAT YOU'RE GETTING
+A complete AI training environment where you can:
+- Watch AI agents learn to navigate 3D mazes
+- Customize maze complexity and training duration
+- See real-time training progress
+- Save trained models for later use
+
+📦 WHAT'S IN THIS PACKAGE
+
+game/              - 3D browser-based maze environment
+training/          - Python AI training scripts
+start-windows.bat  - Launcher for Windows (RECOMMENDED)
+start-mac.command  - Launcher for Mac
+start-linux.sh     - Launcher for Linux
+
+🚀 QUICK START (Windows)
+
+1. Extract this ZIP to any folder (e.g., Desktop/RLMazeTrainer)
+2. Double-click "start-windows.bat"
+3. Follow the on-screen instructions
+4. Two command windows will open + browser
+5. Training starts automatically!
+
+🚀 QUICK START (Mac)
+
+1. Extract this ZIP to any folder
+2. Double-click "start-mac.command"
+3. If prompted, confirm you want to open it
+4. Two terminal windows will open + browser
+5. Training starts automatically!
+
+🚀 QUICK START (Linux)
+
+1. Extract this ZIP to any folder
+2. Right-click "start-linux.sh" → Properties → Permissions → Allow executing
+3. Double-click "start-linux.sh" or run: ./start-linux.sh
+4. Two terminal windows will open + browser
+5. Training starts automatically!
+
+🔧 PREREQUISITES (Automatically Checked)
+
+✅ Python 3.9 or newer
+✅ Node.js 16 or newer  
+✅ 2GB free disk space
+✅ Modern web browser (Chrome/Firefox/Edge)
+
+If the launcher reports missing software, it will provide download links.
+
+📊 YOUR TRAINING CONFIGURATION
+
+• Maze Complexity: {{MAZE_ROOMS}} rooms
+• Training Duration: {{TRAINING_STEPS}} steps  
+• AI Algorithm: {{ALGORITHM}}
+• Model Save Location: ./training/models/
+
+🖥️ WHAT TO EXPECT
+
+When you run the launcher:
+
+1. DEPENDENCY CHECK - Verifies Python and Node.js
+2. INSTALLATION - Installs required packages (first time only)
+3. SERVER START - Opens two windows:
+   - Python Server (WebSocket:8765) - AI training brain
+   - Game Server (HTTP:3000) - 3D visualization
+4. BROWSER OPEN - Automatically opens game page
+5. TRAINING START - AI begins learning immediately
+
+⚠️ IMPORTANT NOTES
+
+• Keep BOTH server windows open during training
+• Training progress shows in the game browser tab
+• Models automatically save to "training/models/"
+• You can stop anytime by closing both server windows
+• Subsequent runs will be faster (no re-installation)
+
+🎮 CONTROLS (In Game)
+
+• Watch the AI learn - no input needed!
+• Browser console shows detailed training logs
+• Training UI shows progress metrics
+
+📁 FOLDER STRUCTURE
+
+RLMazeTrainer/
+├── 📄 start-*.bat/sh/command - Launchers
+├── 🎮 game/ - 3D Maze Environment
+│   ├── src/main.js - Game logic
+│   └── package.json - Dependencies
+├── 🤖 training/ - AI Training
+│   ├── train_sphere_agent.py - Main training script
+│   ├── requirements.txt - Python packages
+│   └── models/ - Saved AI models (created during training)
+└── 📖 INSTRUCTIONS.txt - This file
+
+🐛 TROUBLESHOOTING
+
+Problem: "Python not found"
+Solution: Install Python 3.9+ from https://python.org
+
+Problem: "Node.js not found"  
+Solution: Install Node.js from https://nodejs.org
+
+Problem: Game won't load in browser
+Solution: Manually visit http://localhost:3000
+
+Problem: Training doesn't start
+Solution: Ensure both server windows are open and wait 30 seconds
+
+Problem: "Port already in use"
+Solution: Close other applications or restart computer
+
+🆘 NEED HELP?
+
+Visit: https://github.com/your-repo/support
+Email: support@rlmazetrainer.com
+
+Documentation: https://rlmazetrainer.com/docs
+
+🎉 ENJOY TRAINING!
+
+Watch your AI agents evolve from random movements to maze-solving experts!
+The models saved can be used for future experiments or evaluations.
+
+---
+RL Maze Trainer v1.0
+Generated: {{GENERATION_DATE}}
