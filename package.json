@@ -1,5 +1,6 @@
 {
   "name": "rl-maze-trainer",
+  "type": "module",
   "scripts": {
     "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "cd backend && npm run dev",
@@ -7,10 +8,11 @@
     "build:frontend": "cd frontend && npm run build",
     "start": "cd backend && npm start"
   },
+  "dependencies": {
+    "uuid": "^9.0.1",
+    "archiver": "^6.0.1"
+  },
   "devDependencies": {
     "concurrently": "^7.6.0"
-  },
-  "dependencies": {
-    "uuid": "^13.0.0"
   }
 }
