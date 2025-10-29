@@ -19,15 +19,29 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE, {
 });
 
 // Helper functions (adapted from your generator)
+// REPLACE your old readDirectoryRecursive function with this one
+
 async function readDirectoryRecursive(dir) {
   const files = [];
   async function scan(current) {
-    const items = await fsp.readdir(current, { withFileTypes: true });
+    // 1. Read just the names from the directory
+    const items = await fsp.readdir(current); 
+    
     for (const item of items) {
-      const full = path.join(current, item.name);
-      if (item.name === 'node_modules' || item.name === '.git' || item.name === '__pycache__') continue;
-      if (item.isDirectory()) await scan(full);
-      else files.push(full);
+      // 2. Skip filtered folders
+      if (item === 'node_modules' || item === '.git' || item === '__pycache__') continue;
+      
+      const full = path.join(current, item);
+
+      // 3. Use fsp.stat() which follows symlinks
+      const stats = await fsp.stat(full);
+
+      // 4. This will now be TRUE for the 'game' symlink
+      if (stats.isDirectory()) { 
+        await scan(full); // Recurse into the directory
+      } else {
+        files.push(full); // Add the file
+      }
     }
   }
   await scan(dir);
