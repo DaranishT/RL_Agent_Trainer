@@ -50,9 +50,7 @@ coverage/
 *.command~
 *.bat~
 *.cmd~
-start-*.bat
-start-*.sh
-start-*.command
+
 
 # ⬇ MISC
 # Ignore uploaded test data or runtime temp
